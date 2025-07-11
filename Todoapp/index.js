@@ -5,7 +5,7 @@ for (let i = 0; i < myNodelist.length; i++) {
 
     let closeSpan = document.createElement("SPAN");
     closeSpan.className = "close";
-    closeSpan.textContent = "×";
+    closeSpan.textContent = "❌";
     myNodelist[i].appendChild(closeSpan);
     let editSpan = document.createElement("SPAN");
     editSpan.className = "edit";
@@ -53,17 +53,13 @@ for (let i = 0; i < edit.length; i++) {
 function newTask() {
     let inputElem = document.querySelector(".new-task");
     let inputValue = inputElem.value.trim();
-    if (inputValue === "") {
-        alert("Please write a task before submitting");
-        return;
-    }
 
     let li = document.createElement("LI");
     li.textContent = inputValue;
 
     let closeSpan = document.createElement("SPAN");
     closeSpan.className = "close";
-    closeSpan.textContent = "×";
+    closeSpan.textContent = "❌";
     li.appendChild(closeSpan);
 
     closeSpan.onclick = function () {

@@ -6,8 +6,8 @@
 body,
 html {
     height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'sans-serif';
+    background-color: #d6ffcb;
 }
 
 body {
@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-    width: 320px;
+    width: 520px;
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -44,10 +44,10 @@ body {
     font-size: 16px;
 }
 
-.bg-button {
+.add-btn {
     padding: 10px 16px;
-    background: #d9d9d9;
-    color: #555;
+    background: #009c44;
+    color: #eaeaea;
     border: none;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
