@@ -31,5 +31,5 @@ open index.html
 *Description: This shows the centered todo app with the input and list interface. a user can write on the input and click on the Add button which then triggers the onClick() function iside javascript to add the task to the list so it can be displayed.*
 
 ### Editing a Task
-![Edit Task](./screenshots/edit-task.png)
+![Edit Task](./screenshots/edittask.png)
 *Description: By clicking the edit button a user can edit the task he/she just added and then press the save button to save the task with the necessary changes.*
