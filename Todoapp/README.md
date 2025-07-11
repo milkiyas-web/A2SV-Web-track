@@ -20,6 +20,7 @@ The interface is clean, responsive, and centered on the screen.
 git clone https://github.com/milkiyas-web/A2SV-Web-track.git
 cd Todoapp
 open index.html
+```
 
 ## 📸 Screenshots
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
