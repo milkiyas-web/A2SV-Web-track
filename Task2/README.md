@@ -1,6 +1,6 @@
 # Simple Todo List App (TypeScript)
 
-This is a simple command-line Todo List application built using **TypeScript** and **Node.js**. It allows users to:
+This is a simple command-line Todo List application built using **TypeScript** . It allows users to:
 
 - Add a task
 - Edit a task

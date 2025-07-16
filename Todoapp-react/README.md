@@ -1,6 +1,6 @@
 # 📝 Todo App
 
-This is a simple and minimalistic **Todo List Web Application** built with HTML, CSS, and JavaScript. It allows users to:
+This is a simple and minimalistic **Todo List Web Application** built with React and Typescript. It allows users to:
 
 - Add new tasks
 - Edit existing tasks
@@ -29,12 +29,12 @@ npm run dev
 ### Main Page
 
 ![Main Page](./screenshots/display-progressbar.png)
-_Description: This shows the centered todo app with the input and list interface with a progress bar. a user can write on the input and click on the Add button which then triggers the onClick() function iside javascript to add the task to the list so it can be displayed._
+\_Description: This shows the centered todo app with the input and list interface with a progress bar. a user can write on the input and click on the Add button which then adds the task to the list so it can be displayed.
 
 ### Editing a Task
 
 ![Edit Task](./screenshots/edit.png)
-_Description: By clicking the edit button a user can edit the task he/she just added and then press the save button to save the task with the necessary changes._
+\_Description: By clicking the edit button a user will the task to be edited iside the input box. after making the edits the user can again press the add task button to add/save it back with the changes made.
 
 ![progress Bar](./screenshots/progress.png)
 
