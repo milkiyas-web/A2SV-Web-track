@@ -56,15 +56,24 @@ node todo.js
 ![Main Page](./screenshots/img1.png)
 
 🧪 Example Usage
-Choose 1 to add a task
+
+## Choose 1 to add a task
+
 ![Add Page](./screenshots/add.png)
-Choose 2 and enter an ID to edit a task
+
+## Choose 2 and enter an ID to edit a task
+
 ![Edit Page](./screenshots/edit.png)
-Choose 3 and enter an ID to delete
+
+## Choose 3 and enter an ID to delete
+
 ![Delete Page](./screenshots/delete.png)
-Choose 4 to see your list
+
+## Choose 4 to see your list
+
 ![List Page](./screenshots/img2list.png)
-Choose 5 to exit.
+
+## Choose 5 to exit.
 
 🛠️ Built With
 TypeScript
