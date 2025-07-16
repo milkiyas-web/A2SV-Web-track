@@ -21,6 +21,7 @@ git clone https://github.com/milkiyas-web/A2SV-Web-track.git/task5-react-form
 cd task5-react-form
 npm install
 npm run dev
+```
 
 ## 📸 Screenshots
 
@@ -40,4 +41,3 @@ Description: Shows error messages when the form is submitted with missing or inv
 ![Email Error](./screenshots/email-error.png)
 Description: Shows error messages when the form is submitted with invalid email inputs.
 Thank You !!!
-```
