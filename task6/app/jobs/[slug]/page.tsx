@@ -20,7 +20,7 @@ export default function JobDetailPage({ params }: Params) {
 
     return (
         <div className="p-6 flex sm:gap-8 md:gap-4 max-w-6xl mx-auto">
-            <div className='md:flex-1'>
+            <div className='flex-1'>
                 <h1 className="text-3xl font-bold mb-4">Description</h1>
                 <p className="mb-4">{job.description}</p>
 
@@ -50,7 +50,7 @@ export default function JobDetailPage({ params }: Params) {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className='w-full lg:w-1/3 xl:w-1/4'>
                 <Sidebar
                     categories={job.about.categories}
                     location={job.about.location}
