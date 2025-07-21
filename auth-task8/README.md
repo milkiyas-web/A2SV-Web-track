@@ -93,10 +93,10 @@ npm run dev
 
 ### Main Page
 
-![Main Page](./screenshots/zoderror.png)
+![validation](./screenshots/zod-error.png)
 \_Description: client-side validation for input fields By utilizing zod
 
-![Sign Page](./screenshots/zoderror.png)
+![Signin Page](./screenshots/signin.png)
 \_Description: Signin Page
 
 Thank You!!!
