@@ -56,7 +56,7 @@ npm run dev
 
 ### Main Page
 
-![Main Page](./screenshots/main.png)
+![Main Page](./screenshots/mainp.png)
 \_Description: This page shows the different jobs posted on the website
 
 ### Each job description
