@@ -61,7 +61,7 @@ npm run dev
 
 ### Each job description
 
-![detail](./screenshots/detail.png)
+![detail](./screenshot/detail.png)
 
 Description: On this page each job has it's own description and requirement. from the api provided
 
