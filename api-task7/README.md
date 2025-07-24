@@ -56,12 +56,12 @@ npm run dev
 
 ### Main Page
 
-![Main Page](./screenshots/main.png)
+![Main Page](./screenshot/mainp.png)
 \_Description: This page shows the different jobs posted on the website
 
 ### Each job description
 
-![detail](./screenshots/detail.png)
+![detail](./screenshot/detail.png)
 
 Description: On this page each job has it's own description and requirement. from the api provided
 
