@@ -68,7 +68,6 @@ import { toast } from "sonner";
 import { Toggle } from "./ui/toggle";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 type Bookmarked = {
     id: string;
@@ -76,11 +75,32 @@ type Bookmarked = {
 
 export function BookmarkChecker({ id }: Bookmarked) {
     const router = useRouter();
-    const { data: session } = useSession();
-    const isAuthenticated = !!session;
+
+
 
     const bookmarked = async (id: string) => {
-        if (!isAuthenticated) {
+
+        const res = await fetch("/api/handler")
+        // const data = await res.json()
+        if (res.ok) {
+            try {
+                const res = await fetch(`/api/bookmark/${id}`, {
+                    method: "POST",
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    toast.success("Job bookmarked successfully!");
+                } else {
+                    toast.error(data.error || "Something went wrong");
+                }
+                console.log("Bookmarked:", data);
+            } catch (err) {
+                toast.error("An error occurred while bookmarking.");
+                console.error("Error bookmarking:", err);
+            }
+
+        } else {
             toast("Please sign in before bookmarking a job", {
                 description: "Sign in now to bookmark",
                 action: {
@@ -88,21 +108,9 @@ export function BookmarkChecker({ id }: Bookmarked) {
                     onClick: () => router.push("/sign-in"),
                 },
             });
-            return;
         }
 
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${id}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-            });
-
-            const data = await res.json();
-            console.log("Bookmarked:", data);
-        } catch (err) {
-            console.error("Error bookmarking:", err);
-        }
-    };
+    }
 
     return (
         <Toggle variant="outline" onClick={() => bookmarked(id)}>

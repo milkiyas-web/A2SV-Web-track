@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Toggle } from './ui/toggle';
 import { Bookmark } from 'lucide-react';
 import { BookmarkChecker } from './BookmarkChecker';
-import { useSession } from 'next-auth/react';
 
 interface JobCardProps {
     id: string
@@ -22,20 +21,6 @@ interface JobCardProps {
 }
 
 const JobCard = ({ title, id, description, work_type, position_type, company, location, image }: JobCardProps) => {
-    // const { data: session, status } = useSession()
-    // const bookmarked = async (id: string) => {
-    //     try {
-    //         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${id}`, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //         })
-
-    //         const data = res.json()
-    //         console.log(data)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
     const getWorkTypeStyles = (type: string) => {
         switch (type.toLowerCase()) {
             case 'inPerson':
@@ -89,10 +74,7 @@ const JobCard = ({ title, id, description, work_type, position_type, company, lo
                 <div className="mb-2">
                     <div className='flex'>
                         <Link href={`/jobs/${id}`} className="text-xl flex-1 font-semibold text-gray-800 dark:text-white">{title}</Link>
-                        {/* <Toggle size="lg" variant="outline" className='cursor-pointer' onClick={() => bookmarked(id)} >
-                            <Bookmark size="28px" />
-                        </Toggle> */}
-                        <BookmarkChecker id={id} isAuthenticated={status} />
+                        <BookmarkChecker id={id} />
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{company} • {location}</p>
                 </div>

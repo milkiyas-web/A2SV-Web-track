@@ -9,7 +9,7 @@ interface Params {
 export default async function JobDetailPage({ params }: Params) {
     const id = await params.id
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opportunities/${id}`, {
-        cache: 'no-store', // or revalidate if needed
+        cache: 'no-store',
     });
 
     if (!res.ok) return notFound();

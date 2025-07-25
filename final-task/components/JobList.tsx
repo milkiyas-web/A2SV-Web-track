@@ -10,8 +10,32 @@ import JobCard from './JobCard'
 
 const JobList = () => {
     const [jobs, setJobs] = useState<Job[]>([])
+
+    useEffect(() => {
+        try {
+
+            const checkAut = async () => {
+                const res = await fetch("/api/handler", {
+                    method: "GET",
+                    credentials: "include",
+                })
+                const data = await res.json()
+                if (res.ok) {
+                    console.log(`User ${data.user}`)
+                } else {
+
+                    console.log("No User Loggedin")
+                }
+
+            }
+            checkAut()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [])
     useEffect(() => {
         const getJobs = async () => {
+
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/opportunities/search`, {
                     method: "GET",
