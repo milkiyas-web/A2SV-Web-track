@@ -61,7 +61,7 @@ const JobCard = ({ title, id, description, work_type, position_type, company, lo
     };
 
     return (
-        <div className="bg-white dark:bg-gray-900 border-1 border-gray-300 rounded-2xl p-6 flex gap-4 items-start">
+        <div data-testid="job-card" className="bg-white dark:bg-gray-900 border-1 border-gray-300 rounded-2xl p-6 flex gap-4 items-start">
 
             <Image
                 unoptimized
@@ -75,7 +75,7 @@ const JobCard = ({ title, id, description, work_type, position_type, company, lo
                 <div className="mb-2">
                     <div className='flex'>
                         <Link href={`/jobs/${id}`} className="text-xl flex-1 font-semibold text-gray-800 dark:text-white">{title}</Link>
-                        <BookmarkChecker eventID={eventID} initialIsBookmarked={true} />
+                        <BookmarkChecker id={id} initialIsBookmarked={true} />
 
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{company} • {location}</p>

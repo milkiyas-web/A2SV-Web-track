@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧰 Job Listing App
 
-## Getting Started
+A modern job board built with **Next.js App Router**, **TypeScript**, **Tailwind CSS**, and **NextAuth** for authentication. Users can browse jobs, bookmark positions they’re interested in, and manage their saved jobs securely.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🔍 Browse job listings with details
+- 📌 Bookmark/Unbookmark jobs (for authenticated users)
+- 🧾 View all saved/bookmarked jobs
+- 🔐 Auth integration via NextAuth
+- ✅ Fully tested (Jest + Cypress)
+
+---
+
+## 🧑‍💻 Tech Stack
+
+- **Frontend:** Next.js (App Router), React, TypeScript
+- **Styling:** Tailwind CSS
+- **Authentication:** NextAuth
+- **API:** External API
+- **Testing:**
+  - 🧪 Unit Tests: Jest + React Testing Library
+  - 🧩 Component Tests
+  - 🧭 E2E Tests: Cypress
+
+---
+
+---
+
+## 🔧 Getting Started
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/milkiyas-web/A2SV-Web-track/final-task
+cd final-task
+
+npm install
+
+```
+
+### 2. Set Environment Variables
+
+### Create a .env.local file:
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret
+NEXT_PUBLIC_BASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGKE_SECRET_KEY=
+
+```
+
+### 3. run dev
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Screenshots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Main Page
 
-## Learn More
+![Main Page](./screenshots/list.png)
+\_Description: This page shows testing bookmarking functionality of different jobs posted on the website
 
-To learn more about Next.js, take a look at the following resources:
+## Bookmarks
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![bookmark Page](./screenshots/bookmarked.png)
+\_Description: This page shows the jobs that are bookmarked by an authenticated user.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### LogIn test
 
-## Deploy on Vercel
+![Error](./screenshots/test.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Description: This shows the test when user signs in with a toast message to let the user know that signin is successful.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Thank You!!!

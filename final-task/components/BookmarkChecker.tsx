@@ -8,12 +8,12 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 type Bookmarked = {
-    eventID: string;
+    id: string;
     initialIsBookmarked: boolean;
     // id: string;
 };
 
-export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
+export function BookmarkChecker({ id, initialIsBookmarked }: Bookmarked) {
     const router = useRouter();
     const [isBookmarked, setIsBookmarked] = useState<boolean>(initialIsBookmarked ?? false)
     const { data: session, status } = useSession()
@@ -32,8 +32,8 @@ export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
                 });
 
                 const data = await res.json();
-                const alreadyBookmarked = data?.bookmarks?.some(
-                    (bookmark: any) => bookmark.eventID === eventID
+                const alreadyBookmarked = data?.data.bookmarks?.some(
+                    (bookmark: any) => bookmark.eventID === id
                 );
 
                 setIsBookmarked(!!alreadyBookmarked);
@@ -43,10 +43,10 @@ export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
         };
 
         checkBookmark();
-    }, [status, session, eventID, initialIsBookmarked]);
+    }, [status, session, initialIsBookmarked]);
 
 
-    const toggleBookmark = async (eventID: string) => {
+    const toggleBookmark = async (id: string) => {
 
         if (status !== "authenticated") {
             toast("Please sign in before bookmarking a job", {
@@ -60,13 +60,13 @@ export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
         }
         try {
             const method = isBookmarked ? "DELETE" : "POST"
-            console.log("eventID:", eventID, "isBookmarked:", isBookmarked, "method:", method);
+            console.log("eventID:", id, "isBookmarked:", isBookmarked, "method:", method);
             if (method == "DELETE") {
-                console.log("Trying to DELETE bookmark with ID:", eventID);
+                console.log("Trying to DELETE bookmark with ID:", id);
 
             }
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${eventID}`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${id}`,
                 {
                     method,
                     headers: {
@@ -100,7 +100,7 @@ export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
     };
 
     return (
-        <Toggle variant="outline" pressed={isBookmarked} onClick={() => toggleBookmark(eventID)}>
+        <Toggle variant="outline" pressed={isBookmarked} onClick={() => toggleBookmark(id)}>
             {isBookmarked ? <BookmarkCheck /> : <Bookmark />}
         </Toggle>
     );
