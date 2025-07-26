@@ -1,6 +1,7 @@
 // types/job.ts
 export interface Job {
   id: string;
+  eventID: string;
   title: string;
   orgName: string;
   logoUrl: string;

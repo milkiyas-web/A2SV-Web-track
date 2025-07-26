@@ -13,16 +13,8 @@ const Page = () => {
 
     console.log({ session, status })
     useEffect(() => {
-        if (status !== "authenticated") {
-            toast("Please sign in before bookmarking a job", {
-                description: "Sign in now to bookmark",
-                action: {
-                    label: "Sign in",
-                    onClick: () => router.push("/sign-in"),
-                },
-            });
-            return;
-        }
+        if (status !== "authenticated" || !session?.accessToken) return;
+
         const checkBookmark = async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks`, {
                 method: "GET",
@@ -30,38 +22,37 @@ const Page = () => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${session.accessToken}`,
                 },
-            })
-            const data = await res.json()
-            console.log(data.data)
-            setBookmarks(data.data)
-            console.log(bookmarks)
-        }
-        checkBookmark()
-    }, [])
-    useEffect(() => {
-        console.log("Updated bookmarks:", bookmarks);
-        console.log("Bookmark sample:", bookmarks[0])
+            });
+            const data = await res.json();
+            console.log("Full bookmarks response:", data);
+            setBookmarks(data.data || []);
+        };
 
-    }, [bookmarks]);
+        checkBookmark();
+    }, [status, session]);
+
+
     if (status == "loading") return <h1>Loading...</h1>
     return (
         <div>
             <h1>Bookmarked Jobs</h1>
-            <div className="space-y-4">
-
+            <div className="max-w-4xl w-full mx-auto p-6 space-y-4">
                 {bookmarks.map((bookmark, idx) => (
+
                     <JobCard
                         key={idx}
-                        id={bookmark.id}
+                        //id={bookmark.eventID}
+                        eventID={bookmark.eventID}
                         image={bookmark.logoUrl}
                         title={bookmark.title}
-                        description={bookmark.description}
-                        responsibilities={bookmark.responsibilities}
+                        responsibilities={""}
                         company={bookmark.orgName}
                         location={bookmark.location}
                         work_type={bookmark.opType}
-                        position_type={bookmark.categories}
+                        position_type={[]}
+                        initialIsBookmarked={true}
                     />
+
                 ))}
             </div>
         </div>

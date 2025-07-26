@@ -8,18 +8,20 @@ import { Bookmark } from 'lucide-react';
 import { BookmarkChecker } from './BookmarkChecker';
 
 interface JobCardProps {
-    id: string
+    id?: string
     title: string;
-    description: string;
+    description?: string;
     responsibilities: string;
     company: string;
     location: string;
     image: string;
-    position_type: string[]
+    position_type?: string[]
     work_type: string
+    eventID: string
+    initialIsBookmarked: boolean
 }
 
-const JobCard = ({ title, id, description, work_type, position_type, company, location, image }: JobCardProps) => {
+const JobCard = ({ title, id, description, work_type, position_type, company, location, image, eventID }: JobCardProps) => {
     const getWorkTypeStyles = (type: string) => {
         switch (type.toLowerCase()) {
             case 'inPerson':
@@ -73,19 +75,26 @@ const JobCard = ({ title, id, description, work_type, position_type, company, lo
                 <div className="mb-2">
                     <div className='flex'>
                         <Link href={`/jobs/${id}`} className="text-xl flex-1 font-semibold text-gray-800 dark:text-white">{title}</Link>
-                        <BookmarkChecker id={id} />
+                        <BookmarkChecker eventID={eventID} initialIsBookmarked={true} />
+
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{company} • {location}</p>
                 </div>
 
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-                    {description.length > 300 ? `${description.slice(0, 400)}...` : description}
+                    {description ? description : ""}
                 </p>
 
                 <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className={`text-xs  ${getWorkTypeStyles(work_type)}`}>{work_type}</Badge> <span> | </span>
-                    {position_type.map((r, i) => (
-                        <Badge key={i} className={`text-xs  border ${getPositionTypeStyles(r)}`} variant="outline">{r}</Badge>
+                    <Badge variant="outline" className={`text-xs  ${getWorkTypeStyles(work_type)}`}>{work_type}</Badge> {work_type && position_type?.length > 0 && <span>|</span>}
+                    {position_type?.filter(Boolean).map((r, i) => (
+                        <Badge
+                            key={i}
+                            className={`text-xs border ${getPositionTypeStyles(r)}`}
+                            variant="outline"
+                        >
+                            {r}
+                        </Badge>
                     ))}
                 </div>
             </div>

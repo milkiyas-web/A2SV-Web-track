@@ -8,38 +8,46 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 type Bookmarked = {
-    id: string;
+    eventID: string;
+    initialIsBookmarked: boolean;
+    // id: string;
 };
 
-export function BookmarkChecker({ id }: Bookmarked) {
+export function BookmarkChecker({ eventID, initialIsBookmarked }: Bookmarked) {
     const router = useRouter();
-
-    const [isBookmarked, setIsBookmarked] = useState(false)
+    const [isBookmarked, setIsBookmarked] = useState<boolean>(initialIsBookmarked ?? false)
     const { data: session, status } = useSession()
-    // useEffect(() => {
-    //     if (status !== "authenticated") {
-    //         toast("Please sign in before bookmarking a job", {
-    //             description: "Sign in now to bookmark",
-    //             action: {
-    //                 label: "Sign in",
-    //                 onClick: () => router.push("/sign-in"),
-    //             },
-    //         });
-    //         return;
-    //     }
-    //     const checkBookmark = async () => {
-    //         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks`, {
-    //             method: "GET",
-    //         })
-    //         const data = await res.json()
+    useEffect(() => {
+        if (status !== "authenticated") return;
 
-    //         const alreadyBookmarked = data?.bookmarks?.some(
-    //             (bookmark: any) => bookmark.eventId === id
-    //         );
-    //         setIsBookmarked(!!alreadyBookmarked);
-    //     }
-    // })
-    const toggleBookmark = async (id: string) => {
+        if (typeof initialIsBookmarked === "boolean") return;
+
+        const checkBookmark = async () => {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${session?.accessToken}`,
+                    },
+                });
+
+                const data = await res.json();
+                const alreadyBookmarked = data?.bookmarks?.some(
+                    (bookmark: any) => bookmark.eventID === eventID
+                );
+
+                setIsBookmarked(!!alreadyBookmarked);
+            } catch (err) {
+                console.error("Error checking bookmark status:", err);
+            }
+        };
+
+        checkBookmark();
+    }, [status, session, eventID, initialIsBookmarked]);
+
+
+    const toggleBookmark = async (eventID: string) => {
+
         if (status !== "authenticated") {
             toast("Please sign in before bookmarking a job", {
                 description: "Sign in now to bookmark",
@@ -52,17 +60,23 @@ export function BookmarkChecker({ id }: Bookmarked) {
         }
         try {
             const method = isBookmarked ? "DELETE" : "POST"
+            console.log("eventID:", eventID, "isBookmarked:", isBookmarked, "method:", method);
+            if (method == "DELETE") {
+                console.log("Trying to DELETE bookmark with ID:", eventID);
+
+            }
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${id}`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/bookmarks/${eventID}`,
                 {
                     method,
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${session.accessToken}`,
                     },
-                    body: JSON.stringify({})
+                    ...(method === "POST" ? { body: JSON.stringify({}) } : {})
                 }
             );
+
 
             const data = await res.json();
             console.log(data)
@@ -86,7 +100,7 @@ export function BookmarkChecker({ id }: Bookmarked) {
     };
 
     return (
-        <Toggle variant="outline" pressed={isBookmarked} onClick={() => toggleBookmark(id)}>
+        <Toggle variant="outline" pressed={isBookmarked} onClick={() => toggleBookmark(eventID)}>
             {isBookmarked ? <BookmarkCheck /> : <Bookmark />}
         </Toggle>
     );
