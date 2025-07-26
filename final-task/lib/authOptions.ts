@@ -26,9 +26,13 @@ export const authOptions: NextAuthOptions = {
           }),
         });
 
-        const user = await res.json();
-        if (res.ok && user) {
-          return user;
+        // const user = await res.json();
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          return {
+            ...data.data,
+          };
         }
         return null;
       },
@@ -43,11 +47,18 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user;
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.id = user.id;
+        token.role = user.role;
+      }
+
       return token;
     },
     async session({ session, token }) {
       session.user = token.user as typeof session.user;
+      session.accessToken = token.accessToken as string;
+
       return session;
     },
   },

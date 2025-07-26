@@ -17,7 +17,6 @@ interface JobCardProps {
     image: string;
     position_type: string[]
     work_type: string
-    slug: string;
 }
 
 const JobCard = ({ title, id, description, work_type, position_type, company, location, image }: JobCardProps) => {

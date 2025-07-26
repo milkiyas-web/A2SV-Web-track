@@ -48,20 +48,26 @@ const AuthForm = ({ type }: { type: FormType }) => {
         try {
             console.log("Form submitted with values:", values);
             if (type === "sign-in") {
-                const res = await fetch("https://akil-backend.onrender.com/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        email: values.email,
-                        password: values.password
-                    }),
-                });
+                // const res = await fetch("https://akil-backend.onrender.com/login", {
+                //     method: "POST",
+                //     headers: { "Content-Type": "application/json" },
+                //     body: JSON.stringify({
+                //         email: values.email,
+                //         password: values.password
+                //     }),
+                //});
+                const res = await signIn("credentials", {
+                    email: values.email,
+                    password: values.password
+                })
 
-                const data = await res.json()
-                console.log(data)
-                if (!res.ok) {
-                    alert(data.error)
-                    throw new Error(data?.error || "Login failed")
+                // const data = await res?.json()
+                console.log(res)
+                if (res?.error) {
+                    toast.error("Invalid credentials");
+                } else {
+                    toast.success("Signed in successfully");
+                    router.push("/");
                 }
 
 

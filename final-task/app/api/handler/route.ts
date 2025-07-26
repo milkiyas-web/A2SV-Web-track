@@ -1,22 +1,20 @@
-import { authOptions } from "@/lib/authOptions";
-import { getServerSession } from "next-auth/next";
-import { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
-export async function GET(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  console.log(session);
-
+export async function POST(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const session = await auth();
   if (!session) {
-    return new Response(JSON.stringify({ message: "Not authenticated" }), {
-      status: 401,
-    });
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  return new Response(
-    JSON.stringify({ message: "Authenticated", user: session.user }),
-    { status: 200 }
-  );
+  console.log(session);
+
+  return NextResponse.json({ success: true });
 }
+
 // app/api/bookmarks/route.ts
 // import { NextRequest, NextResponse } from "next/server";
 // import { getServerSession } from "next-auth";
