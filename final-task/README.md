@@ -67,13 +67,13 @@ npm run dev
 
 ### Main Page
 
-![Main Page](./screenshots/list.png)
-\_Description: This page shows testing bookmarking functionality of different jobs posted on the website
+![Main Page](./screenshots/bookmarks.png)
+\_Description: This page shows the jobs that are bookmarked by an authenticated user.
 
 ## Bookmarks
 
 ![bookmark Page](./screenshots/bookmarked.png)
-\_Description: This page shows the jobs that are bookmarked by an authenticated user.
+\_Description: This page shows testing bookmarking functionality of different jobs posted on the website
 
 ### LogIn test
 
