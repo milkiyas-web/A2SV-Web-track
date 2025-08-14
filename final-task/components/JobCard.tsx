@@ -75,7 +75,7 @@ const JobCard = ({ title, id, description, work_type, position_type, company, lo
                 <div className="mb-2">
                     <div className='flex'>
                         <Link href={`/jobs/${id}`} className="text-xl flex-1 font-semibold text-gray-800 dark:text-white">{title}</Link>
-                        <BookmarkChecker id={id} initialIsBookmarked={true} />
+                        <BookmarkChecker id={id} initialIsBookmarked={false} />
 
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{company} • {location}</p>
